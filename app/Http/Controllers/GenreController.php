@@ -9,14 +9,11 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $genre = Genre::select('id', 'name')->get();
 
-        return Inertia::render('Movies/Genre.Index', [
+        return Inertia::render('Genre/GenreIndex', [
             'genre' => $genre,
         ]);
     }

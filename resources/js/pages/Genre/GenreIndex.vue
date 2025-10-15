@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Head, Link } from '@inertiajs/vue3'
 defineProps<{
     genre: {
         id: number
@@ -8,6 +9,8 @@ defineProps<{
 </script>
 
 <template>
+    <Head title="All Genre"/>
+
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">List Genre</h1>
 
