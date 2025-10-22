@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
         });

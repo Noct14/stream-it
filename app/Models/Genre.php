@@ -8,7 +8,7 @@ class Genre extends Model
 {
     protected $fillable =
     [
-        "id",
+        "slug",
         "name"
     ];
 }

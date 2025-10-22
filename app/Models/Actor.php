@@ -8,6 +8,7 @@ class Actor extends Model
 {
     protected $fillable =
     [
+        "slug",
         "name",
         "image_url"
     ];
