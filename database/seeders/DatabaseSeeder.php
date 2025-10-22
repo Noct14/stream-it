@@ -36,13 +36,13 @@ class DatabaseSeeder extends Seeder
             [
                 'slug' => Str::slug('The Dark Knight', '-'),
                 'title' => 'The Dark Knight',
-                'poster_url' => 'https://upload.wikimedia.org/wikipedia/id/8/8a/Dark_Knight.jpg',
+                'poster_url' => 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UY2048_.jpg',
                 'file_path' => 'movies/the-dark-knight.mp4'
             ],
             [
                 'slug' => Str::slug('Inception', '-'),
                 'title' => 'Inception',
-                'poster_url' => 'https://upload.wikimedia.org/wikipedia/id/9/91/Inception_poster.jpg',
+                'poster_url' => 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX700_.jpg',
                 'file_path' => 'movies/inception.mp4'
             ],
         ]);

@@ -14,10 +14,10 @@ class ActorController extends Controller
      */
     public function index()
     {
-        $actor = Actor::all();
+        $actors = Actor::select('id', 'slug', 'name', 'image_url')->get();
 
         return Inertia::render('Actor/ActorIndex', [
-            'actor' =>$actor
+            'actors' =>$actors
         ]);
     }
 

@@ -329,6 +329,7 @@
     }
 }
 
+
 /* animation */
 .fade-enter-active,
 .fade-leave-active {
@@ -379,6 +380,10 @@
     margin-bottom: 1rem;
     background: linear-gradient(90deg, #ffd700, #ff8c00);
     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* For non-webkit browsers */
+    color: transparent;
     -webkit-text-fill-color: transparent;
 }
 

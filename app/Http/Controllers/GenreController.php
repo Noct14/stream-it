@@ -11,7 +11,7 @@ class GenreController extends Controller
 {
     public function index()
     {
-        $genre = Genre::select('id', 'name')->get();
+        $genre = Genre::select('id', 'name', 'slug')->get();
 
         return Inertia::render('Genre/GenreIndex', [
             'genre' => $genre,
