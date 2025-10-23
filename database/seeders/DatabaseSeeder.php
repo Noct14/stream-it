@@ -31,19 +31,19 @@ class DatabaseSeeder extends Seeder
                 'slug' => Str::slug('Avengers: Endgame', '-'),
                 'title' => 'Avengers: Endgame',
                 'poster_url' => 'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_FMjpg_UX1000_.jpg',
-                'file_path' => 'movies/avengers-endgame.mp4'
+                'file_path' => 'videos/test1.mp4'
             ],
             [
                 'slug' => Str::slug('The Dark Knight', '-'),
                 'title' => 'The Dark Knight',
                 'poster_url' => 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UY2048_.jpg',
-                'file_path' => 'movies/the-dark-knight.mp4'
+                'file_path' => 'videos/test2.mp4'
             ],
             [
                 'slug' => Str::slug('Inception', '-'),
                 'title' => 'Inception',
                 'poster_url' => 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX700_.jpg',
-                'file_path' => 'movies/inception.mp4'
+                'file_path' => 'videos/test3.mp4'
             ],
         ]);
 
@@ -80,5 +80,46 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        DB::table('movie_has_actor')->insert([
+            [
+                'movie_id' => 1,
+                'actor_id' => 1
+            ],
+            [
+                'movie_id' => 2,
+                'actor_id' => 2
+            ],
+            [
+                'movie_id' => 3,
+                'actor_id' => 3
+            ]
+        ]);
+
+        DB::table('movie_has_genre')->insert([
+            [
+                'movie_id' => 1,
+                'genre_id' => 1
+            ],
+            [
+                'movie_id' => 1,
+                'genre_id' => 3
+            ],
+            [
+                'movie_id' => 2,
+                'genre_id' => 1
+            ],
+            [
+                'movie_id' => 2,
+                'genre_id' => 3
+            ],
+            [
+                'movie_id' => 3,
+                'genre_id' => 1
+            ],
+            [
+                'movie_id' => 3,
+                'genre_id' => 2
+            ],
+        ]);
     }
 }

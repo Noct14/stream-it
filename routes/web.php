@@ -27,3 +27,8 @@ require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
 Route::get('/videos/{filename}', [VideoController::class, 'stream']);
+
+Route::get('/genre/{slug}', [GenreController::class, 'show'])->name('genre.show');
+Route::get('/actor/{slug}', [ActorController::class, 'show'])->name('actor.show');
+
+Route::get('/search', [MovieController::class, 'search'])->name('movies.search');

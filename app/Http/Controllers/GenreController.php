@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -37,9 +38,26 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show($slug)
     {
-        //
+        $genre = DB::table('genres')->where('slug', $slug)->first();
+
+        if (!$genre) {
+            abort(404, 'Genre not found');
+        }
+
+        $movies = DB::table('movies')
+            ->join('movie_has_genre', 'movies.id', '=', 'movie_has_genre.movie_id')
+            ->join('genres', 'movie_has_genre.genre_id', '=', 'genres.id')
+            ->where('genres.slug', $slug)
+            ->select('movies.id', 'movies.slug', 'movies.title', 'movies.poster_url', 'movies.file_path')
+            ->distinct()
+            ->get();
+
+        return Inertia::render('Genre/GenreShow', [
+            'genre' => $genre,
+            'movies' => $movies,
+        ]);
     }
 
     /**

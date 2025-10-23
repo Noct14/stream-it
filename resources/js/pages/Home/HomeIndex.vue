@@ -25,40 +25,66 @@ const scrollToMovies = () => {
         </div>
     </section>
 
+    <section
+    id="movie"
+    class="px-6 py-16 min-h-screen bg-gradient-to-b from-gray-900 to-black text-[var(--foreground)]"
+    >
+        <!-- Title -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 tracking-wide">
+            🎞️ Fan-Favorite Movies
+            </h2>
+            <p class="text-gray-400 text-sm md:text-base">
+            Temukan film pilihan terbaik dari berbagai genre
+            </p>
+        </div>
 
-    <section id="movie" class="px-6 py-10 bg-gradient-to-b from-gray-900 to-black min-h-screen">
-        <h2 class="text-3xl font-bold text-white mb-8 text-center tracking-wide">
-        🎞️ Fan-Favorite Movie
-        </h2>
-
+        <!-- Movie Grid -->
         <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center max-w-7xl mx-auto"
         >
             <div
-                v-for="movie in movies"
-                :key="movie.id"
-                class="group relative overflow-hidden rounded-xl bg-gray-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            v-for="movie in movies"
+            :key="movie.id"
+            class="group relative w-full max-w-[200px] overflow-hidden rounded-xl shadow-md hover:shadow-[0_0_20px_var(--primary)] transition-transform duration-300 hover:scale-105"
             >
-                <Link :href="`/movie/${movie.slug}`" class="block">
-                <img
-                    v-if="movie.poster_url"
-                    :src="movie.poster_url"
-                    alt="poster"
-                    class="rounded-xl object-contain w-auto max-h-[400px] transition-all duration-300 group-hover:brightness-110"
-                />
-                <div
-                    class="absolute bottom-0 left-0 right-0 text-center p-3 text-white bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
-                >
-                    <p class="text-sm font-semibold truncate">{{ movie.title }}</p>
-                </div>
+                <Link :href="`/movie/${movie.slug}`" class="block w-full h-full">
+                    <div class="relative aspect-[2/3] rounded-xl overflow-hidden bg-gray-800">
+                        <img
+                        v-if="movie.poster_url"
+                        :src="movie.poster_url"
+                        alt="poster"
+                        loading="lazy"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+
+                    <!-- Overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end justify-center"
+                        >
+                            <p
+                            class="text-white text-sm font-semibold mb-3 px-2 text-center truncate opacity-0 group-hover:opacity-100 group-hover:translate-y-[-4px] transition-all duration-400"
+                            >
+                            {{ movie.title }}
+                            </p>
+                        </div>
+                    </div>
                 </Link>
             </div>
         </div>
 
+        <!-- Empty State -->
+        <div
+            v-if="!movies || movies.length === 0"
+            class="text-center text-gray-400 py-20"
+        >
+            <p>Belum ada data film 😢</p>
+        </div>
     </section>
+
 </template>
 
-<style>
+<style scoped>
     .hero{
         background: linear-gradient(
         to bottom,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -17,6 +18,36 @@ class MovieController extends Controller
             'movies' => $movies,
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $query = trim($request->input('q'));
+
+        // Kalau kosong, langsung redirect balik biar gak query kosong
+        if (empty($query)) {
+            return redirect()->back();
+        }
+
+        // Cari movie berdasarkan title
+        $movies = DB::table('movies')
+            ->select('id', 'slug', 'title', 'poster_url')
+            ->where('title', 'like', "%{$query}%")
+            ->get();
+
+        // Cari actor berdasarkan name
+        $actors = DB::table('actors')
+            ->select('id', 'slug', 'name', 'image_url')
+            ->where('name', 'like', "%{$query}%")
+            ->get();
+
+        // Kirim hasil ke page Search.vue
+        return inertia('Home/Search', [
+            'query' => $query,
+            'movies' => $movies,
+            'actors' => $actors,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

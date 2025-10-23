@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { router } from '@inertiajs/vue3'
 import genre from '@/routes/genre'
 import movie from '@/routes/movies'
 import actor from '@/routes/actor'
@@ -16,6 +17,15 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 const isOpen = ref(false)
 
+const searchQuery = ref('')
+
+const handleSearch = (e: Event) => {
+  e.preventDefault()
+  if (searchQuery.value.trim() !== '') {
+    router.get(`/search`, { q: searchQuery.value })
+    searchQuery.value = ''
+  }
+}
 </script>
 
 <template>
@@ -27,13 +37,14 @@ const isOpen = ref(false)
         </Link>
 
         <!-- Search -->
-        <div class="navbar-search">
-        <input
+        <form class="navbar-search" @submit="handleSearch">
+            <input
+            v-model="searchQuery"
             type="text"
             placeholder="Cari film..."
             class="navbar-input"
-        />
-        </div>
+            />
+        </form>
 
         <!-- Hamburger -->
         <button class="navbar-toggle" @click="isOpen = !isOpen">
