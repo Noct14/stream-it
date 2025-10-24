@@ -46,7 +46,7 @@ defineProps<{
         <!-- 💡 Video Player -->
         <div class="relative w-full max-w-2xl rounded-lg overflow-hidden shadow-lg mb-6">
           <video
-            :src="`/${movie.file_path}`"
+            :src="`/videos/${movie.file_path}`"
             controls
             class="w-full h-auto object-cover rounded-lg"
           ></video>

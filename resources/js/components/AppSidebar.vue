@@ -12,16 +12,35 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes/admin';
+import  movies  from '@/routes/admin/movies';
+import  actors  from '@/routes/admin/actors';
+import  genres  from '@/routes/admin/genres';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Clapperboard, User, Tags } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Movies',
+        href: movies.index(),
+        icon: Clapperboard,
+    },
+    {
+        title: 'Actors',
+        href: actors.index(),
+        icon: User,
+    },
+    {
+        title: 'Genres',
+        href: genres.index(),
+        icon: Tags,
     },
 ];
 

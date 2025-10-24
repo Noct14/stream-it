@@ -32,8 +32,9 @@ class MovieController extends Controller
             'video' => 'required|file|mimetypes:video/mp4,video/mpeg,video/quicktime',
         ]);
 
+        $filename = $validated['slug'] . '.' . $request->file('video')->getClientOriginalExtension();
 
-        $path = $request->file('video')->store('videos');
+        $path = $request->file('video')->storeAs('', $filename, 'videos' );
 
         DB::table('movies')->insert([
             'title' => $validated['title'],
@@ -63,7 +64,7 @@ class MovieController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:movies,slug,' . $id,
             'poster_url' => 'nullable|string',
-            'video' => 'nullable|file|mimetypes:video/mp4,video/mpeg,video/quicktime|max:512000',
+            'video' => 'nullable|file|mimetypes:video/mp4,video/mpeg,video/quicktime',
         ]);
 
         $data = [
@@ -74,14 +75,18 @@ class MovieController extends Controller
         ];
 
         if ($request->hasFile('video')) {
-            $path = $request->file('video')->store('videos');
-            $data['file_path'] = $path;
+            $filename = $validated['slug'] . '.' . $request->file('video')->getClientOriginalExtension();
+
+            $path = $request->file('video')->storeAs('', $filename, 'videos');
+
+            $data['file_path'] = '' . $filename;
         }
 
         DB::table('movies')->where('id', $id)->update($data);
 
         return redirect()->route('admin.movies.index')->with('success', 'Movie updated successfully!');
     }
+
 
 
     public function destroy($id)
