@@ -11,7 +11,7 @@ class actorController extends Controller
 {
     public function index()
     {
-        $actors = DB::table('actors')->select('id', 'name', 'slug')->get();
+        $actors = DB::table('actors')->select('id', 'name', 'slug', 'image_url')->get();
         return Inertia::render('admin/actors/Index', ['actors' => $actors]);
     }
 
@@ -25,6 +25,8 @@ class actorController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:actors,slug',
+            'image_url' => 'nullable|url',
+
         ]);
 
         DB::table('actors')->insert($validated);
@@ -42,6 +44,7 @@ class actorController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:actors,slug,' . $id,
+            'image_url' => 'nullable|url',
         ]);
 
         DB::table('actors')->where('id', $id)->update($validated);
