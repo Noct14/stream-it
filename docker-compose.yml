@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stream-it-app
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_web
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
