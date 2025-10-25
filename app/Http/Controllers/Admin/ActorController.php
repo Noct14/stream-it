@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-class actorController extends Controller
+class ActorController extends Controller
 {
     public function index()
     {
