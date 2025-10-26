@@ -18,7 +18,6 @@ defineProps<{
   <div class="min-h-screen bg-black text-white">
     <Navbar />
 
-    <!-- HERO HEADER -->
     <section class="pt-24 pb-10 text-center">
       <h1 class="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
         Semua Aktor
@@ -26,7 +25,6 @@ defineProps<{
       <p class="text-gray-400">Temukan aktor dan aktris favoritmu dari berbagai film terbaik 🎬</p>
     </section>
 
-    <!-- GRID ACTORS -->
     <section class="max-w-7xl mx-auto px-6 pb-20">
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
         <div

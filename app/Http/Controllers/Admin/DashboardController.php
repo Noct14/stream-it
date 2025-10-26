@@ -14,7 +14,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Data statistik dashboard
         $stats = [
             'total_users' => User::count(),
             'total_movies' => Movie::count(),

@@ -22,7 +22,6 @@ defineProps<{
         class="movie-card group"
       >
         <Link :href="`/movie/${movie.slug}`" class="movie-link">
-          <!-- Poster -->
           <div class="poster-wrapper">
             <img
               :src="movie.poster_url"
@@ -30,8 +29,6 @@ defineProps<{
               class="poster-image"
               loading="lazy"
             />
-
-            <!-- Overlay muncul saat hover -->
             <div class="poster-overlay">
               <h3 class="poster-title">{{ movie.title }}</h3>
             </div>
@@ -70,8 +67,6 @@ defineProps<{
   max-width: 70rem;
   margin: 0 auto;
 }
-
-/* --- Movie Card --- */
 .movie-card {
   width: 100%;
   max-width: 180px;
@@ -84,8 +79,6 @@ defineProps<{
   transform: scale(1.05);
   box-shadow: 0 0 20px var(--primary);
 }
-
-/* --- Poster --- */
 .poster-wrapper {
   position: relative;
   width: 100%;
@@ -104,8 +97,6 @@ defineProps<{
 .movie-card:hover .poster-image {
   transform: scale(1.1);
 }
-
-/* --- Overlay Hover --- */
 .poster-overlay {
   position: absolute;
   inset: 0;
@@ -130,7 +121,6 @@ defineProps<{
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* --- Empty --- */
 .empty-state {
   text-align: center;
   color: #9ca3af;

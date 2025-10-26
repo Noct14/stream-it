@@ -16,10 +16,8 @@ defineProps<{
   <Head :title="movie.title" />
 
   <div class="relative min-h-screen bg-black text-white">
-    <!-- ✅ Navbar -->
     <Navbar />
 
-    <!-- ✅ Background blur overlay -->
     <div
       class="absolute inset-0 -z-10"
       :style="{
@@ -30,20 +28,15 @@ defineProps<{
       }"
     ></div>
 
-    <!-- ✅ Main Content -->
     <main class="container mx-auto flex flex-col md:flex-row items-center justify-center px-6 py-24 gap-10">
-      <!-- 🎞 Poster -->
       <img
         :src="movie.poster_url"
         :alt="movie.title"
         class="w-64 md:w-80 rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl"
       />
-
-      <!-- 🎬 Info + Player -->
       <div class="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
         <h1 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">{{ movie.title }}</h1>
 
-        <!-- 💡 Video Player -->
         <div class="relative w-full max-w-2xl rounded-lg overflow-hidden shadow-lg mb-6">
           <video
             :src="`/videos/${movie.file_path}`"
@@ -52,14 +45,10 @@ defineProps<{
           ></video>
         </div>
 
-
-        <!-- 📜 Description Placeholder -->
         <p class="text-gray-300 leading-relaxed mb-6">
           Tonton film <strong>{{ movie.title }}</strong> dalam kualitas terbaik. Nikmati pengalaman menonton sinematik
           langsung dari browser kamu tanpa buffering.
         </p>
-
-        <!-- 🎟️ CTA -->
         <a
           href="#"
           class="bg-primary text-black font-semibold px-6 py-3 rounded-md shadow-lg hover:bg-yellow-400 transition transform hover:scale-105"

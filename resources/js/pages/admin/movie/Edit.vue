@@ -3,7 +3,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import { watch } from 'vue'
 
-// ✅ Props declaration
+// Props declaration
 const props = defineProps<{
   movie: {
     id: number
@@ -14,13 +14,12 @@ const props = defineProps<{
   }
 }>()
 
-// ✅ Tambahkan `_method` di deklarasi awal form
 const form = useForm({
   title: props.movie.title,
   slug: props.movie.slug,
   poster_url: props.movie.poster_url || '',
   video: null as File | null,
-  _method: 'put' as string, // 👈 ini biar gak error di TypeScript
+  _method: 'put' as string,
 })
 
 function onFileChange(e: Event) {
@@ -31,7 +30,6 @@ function onFileChange(e: Event) {
 }
 
 function submit() {
-  // gak perlu lagi set manual _method di sini
   form.post(`/admin/movies/${props.movie.id}`, {
     forceFormData: true,
   })

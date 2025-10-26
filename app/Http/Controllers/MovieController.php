@@ -34,13 +34,11 @@ class MovieController extends Controller
             ->where('title', 'like', "%{$query}%")
             ->get();
 
-        // Cari actor berdasarkan name
         $actors = DB::table('actors')
             ->select('id', 'slug', 'name', 'image_url')
             ->where('name', 'like', "%{$query}%")
             ->get();
 
-        // Kirim hasil ke page Search.vue
         return inertia('Home/Search', [
             'query' => $query,
             'movies' => $movies,

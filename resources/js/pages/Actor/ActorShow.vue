@@ -13,7 +13,6 @@ defineProps<{
   <Navbar />
 
   <div class="actor-page">
-    <!-- Header Actor -->
     <section class="actor-header">
       <img :src="actor.image_url" :alt="actor.name" class="actor-photo" />
       <div class="actor-info">
@@ -22,7 +21,6 @@ defineProps<{
       </div>
     </section>
 
-    <!-- Movie Grid -->
     <section class="movie-grid">
       <div
         v-for="movie in movies"
@@ -54,7 +52,6 @@ defineProps<{
 </template>
 
 <style scoped>
-/* --- PAGE --- */
 .actor-page {
   padding: 1.5rem;
   padding-top: 6rem;
@@ -62,8 +59,6 @@ defineProps<{
   background: var(--background);
   color: var(--foreground);
 }
-
-/* --- HEADER --- */
 .actor-header {
   display: flex;
   flex-direction: column;
@@ -91,8 +86,6 @@ defineProps<{
   font-size: 0.95rem;
   color: #9ca3af;
 }
-
-/* --- MOVIE GRID --- */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -101,8 +94,6 @@ defineProps<{
   max-width: 70rem;
   margin: 0 auto;
 }
-
-/* --- MOVIE CARD --- */
 .movie-card {
   width: 100%;
   max-width: 180px;
@@ -137,7 +128,6 @@ defineProps<{
   transform: scale(1.1);
 }
 
-/* --- OVERLAY --- */
 .poster-overlay {
   position: absolute;
   inset: 0;
