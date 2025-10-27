@@ -1,8 +1,81 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router  } from '@inertiajs/vue3';
 import movie from '@/routes/admin/movies';
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 import { ref } from 'vue'
+
+function ConfirmDialog(options: {
+  title?: string
+  text?: string
+  icon?: 'success' | 'error' | 'warning' | 'info' | 'question'
+  confirmButtonText?: string
+  cancelButtonText?: string
+} = {}) {
+  const isDark = document.documentElement.classList.contains('dark')
+
+  return Swal.fire({
+    title: options.title || 'Apakah kamu yakin?',
+    text: options.text || 'Tindakan ini tidak dapat dibatalkan.',
+    icon: options.icon || 'warning',
+    showCancelButton: true,
+    confirmButtonText: options.confirmButtonText || 'Ya, lanjutkan',
+    cancelButtonText: options.cancelButtonText || 'Batal',
+    reverseButtons: true,
+    background: isDark
+      ? 'linear-gradient(145deg, #0f172a, #1e293b)'
+      : 'linear-gradient(145deg, #ffffff, #f8fafc)',
+    color: isDark ? '#f1f5f9' : '#1e293b',
+    iconColor: options.icon === 'warning'
+      ? '#fbbf24'
+      : options.icon === 'success'
+      ? '#22c55e'
+      : options.icon === 'error'
+      ? '#ef4444'
+      : options.icon === 'info'
+      ? '#3b82f6'
+      : '#a855f7',
+    customClass: {
+      popup:
+        'rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 p-6 backdrop-blur-sm',
+      title: 'text-lg font-semibold mb-1',
+      htmlContainer: 'text-sm text-gray-600 dark:text-gray-400',
+      confirmButton:
+        'bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200',
+      cancelButton: isDark
+        ? 'bg-slate-700 hover:bg-slate-600 text-gray-200 font-medium px-5 py-2.5 rounded-lg transition-all duration-200'
+        : 'bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-5 py-2.5 rounded-lg transition-all duration-200',
+    },
+    buttonsStyling: false,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown animate__faster',
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp animate__faster',
+    },
+  })
+}
+
+
+const isDark = document.documentElement.classList.contains('dark');
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3500,
+  timerProgressBar: true,
+  background: isDark
+    ? 'linear-gradient(135deg, #1e293b, #0f172a)' // dark mode
+    : 'linear-gradient(135deg, #ffffff, #f8fafc)', // light mode
+  color: isDark ? '#f8fafc' : '#1e293b',
+  customClass: {
+    popup: isDark
+      ? 'rounded-xl shadow-lg border border-slate-700 px-4 py-3'
+      : 'rounded-xl shadow-lg border border-gray-200 px-4 py-3',
+  },
+});
 
 const showPoster = ref<boolean>(false)
 const selectedPoster = ref<string | null>(null)
@@ -17,6 +90,32 @@ const closePoster = () => {
   setTimeout(() => (selectedPoster.value = null), 300)
 }
 defineProps<{ movies: any[] }>();
+
+function confirmDelete(movie: { id: number; title: string }) {
+  ConfirmDialog({
+    title: 'Delete Movie?',
+    text: 'This movie will be permanently removed.',
+    icon: 'warning',
+    confirmButtonText: 'Yes, delete it',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      router.delete(`/admin/movies/${movie.id}`, {
+        onSuccess: () => {
+          Toast.fire({
+            icon: 'success',
+            title: 'Movie deleted successfully'
+          })
+        },
+        onError: () => {
+            Toast.fire({
+                icon: 'error',
+                title: 'Failed to delete movie'
+         });
+        }
+      })
+    }
+  })
+}
 </script>
 
 <template>
@@ -64,9 +163,10 @@ defineProps<{ movies: any[] }>();
               <td>
                 <div class="actions">
                     <Link :href="`/admin/movies/${movie.id}/edit`" class="btn-link">Edit</Link>
-                    <form :action="`/admin/movies/${movie.id}`" method="post" @submit.prevent="$inertia.delete(`/admin/movies/${movie.id}`)">
+                    <!-- <form :action="`/admin/movies/${movie.id}`" method="post" @submit.prevent="$inertia.delete(`/admin/movies/${movie.id}`)">
                       <button type="submit" class="btn-danger">Delete</button>
-                    </form>
+                    </form> -->
+                    <button type="submit" class="btn-danger" @click="confirmDelete(movie)" >Delete</button>
                 </div>
               </td>
             </tr>
