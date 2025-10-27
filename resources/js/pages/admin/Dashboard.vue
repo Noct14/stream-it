@@ -30,7 +30,9 @@ const chartData = {
     {
       label: 'New Users',
       data: [12, 19, 3, 5],
-      backgroundColor: '#2563eb',
+      backgroundColor: 'rgba(37, 99, 235, 0.6)',
+      borderRadius: 8,
+      borderSkipped: false,
     },
   ],
 };
@@ -38,24 +40,97 @@ const chartData = {
 
 <template>
   <Head title="Dashboard" />
-
   <AppLayout :breadcrumbs="breadcrumbs">
-    <div class="p-6 space-y-6">
-      <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <div class="dashboard-container">
+      <h1 class="dashboard-title">Admin Dashboard</h1>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div
-          v-for="(value, key) in stats"
-          :key="key"
-          class="p-4 bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-200 dark:border-gray-700"
-        >
-          <h2 class="text-sm text-gray-500 capitalize">
-            {{ key.replace('_', ' ') }}
-          </h2>
-          <p class="text-3xl font-semibold mt-2">{{ value }}</p>
+      <div class="stats-grid">
+        <div v-for="(value, key) in stats" :key="key" class="stat-card">
+          <div class="stat-title">{{ key.replace('_', ' ') }}</div>
+          <div class="stat-value">{{ value }}</div>
         </div>
       </div>
-      <BarChart :chartData="chartData" />
+
+      <div class="chart-container">
+        <h2 class="chart-title">User Growth Overview</h2>
+        <BarChart :chartData="chartData" />
+      </div>
     </div>
   </AppLayout>
 </template>
+
+<style scoped>
+.dashboard-container {
+  padding: 2rem;
+  color: var(--foreground);
+  background-color: var(--background);
+  min-height: 100%;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* Statistik cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.stat-title {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Chart section */
+.chart-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease;
+}
+.chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--muted-foreground);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.25rem;
+  }
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+}
+</style>
