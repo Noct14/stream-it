@@ -18,7 +18,7 @@ defineProps<{
 
   <div class="genre-page">
     <div class="genre-header">
-      <h1>🎬 List Genre</h1>
+      <h1>List Genre</h1>
       <p>Pilih genre untuk menemukan film favoritmu</p>
     </div>
 

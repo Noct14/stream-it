@@ -13,7 +13,7 @@ defineProps<{
   <Navbar />
 
   <div class="genre-page">
-    <h1 class="genre-title">🎞️ {{ genre.name }}</h1>
+    <h1 class="genre-title">{{ genre.name }}</h1>
 
     <section class="genre-grid">
       <div

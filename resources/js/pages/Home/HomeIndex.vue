@@ -32,7 +32,7 @@ const scrollToMovies = () => {
         <!-- Title -->
         <div class="text-center mb-10">
             <h2 class="text-3xl md:text-4xl font-bold mb-2 tracking-wide">
-            🎞️ Fan-Favorite Movies
+            Fan-Favorite Movies
             </h2>
             <p class="text-gray-400 text-sm md:text-base">
             Temukan film pilihan terbaik dari berbagai genre

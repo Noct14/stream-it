@@ -22,7 +22,7 @@ defineProps<{
       <h1 class="text-4xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
         Semua Aktor
       </h1>
-      <p class="text-gray-400">Temukan aktor dan aktris favoritmu dari berbagai film terbaik 🎬</p>
+      <p class="text-gray-400">Temukan aktor dan aktris favoritmu dari berbagai film terbaik</p>
     </section>
 
     <section class="max-w-7xl mx-auto px-6 pb-20">
